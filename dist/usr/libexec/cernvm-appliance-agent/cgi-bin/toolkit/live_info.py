@@ -68,10 +68,12 @@ def update_check_with_version():
     return [response != NO_ACTION, a[0]]
 
 def turn_service(service_name, turn):
-    command='sudo chkconfig ' + service_name + ' ' + turn    
+    if (turn == "on"):
+        newturn = "start"
+    else:
+        newturn = "stop"
+    command='sudo service ' + service_name + ' ' + newturn    
     a=execute(command)
-    
-    return a[1]
     
 def main():
     cmds = {'mem':getMemoryUsage, 'kernel':getKernelVersion,\
